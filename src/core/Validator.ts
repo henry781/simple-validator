@@ -25,8 +25,7 @@ export class Validator {
         // when obj is an object
         if (obj === Object(obj)) {
             const result = [];
-
-            const rules: ValidatorRule[] = Reflect.getOwnMetadata('validator:rules', obj.constructor.prototype) || [];
+            const rules = Validator.getValidationRules(obj.constructor);
 
             for (const rule of rules) {
                 const validation = rule.validatorFn(obj, rule.propertyKey, rule.options);
@@ -47,5 +46,24 @@ export class Validator {
         }
 
         return [];
+    }
+
+    /**
+     * Get validation rules
+     * @param cls
+     */
+    public static getValidationRules(cls: any): ValidatorRule[] {
+
+        const rules: ValidatorRule[] = [];
+
+        let proto = cls.prototype;
+
+        while (proto) {
+            rules.push(...Reflect.getOwnMetadata('validator:rules', proto) || []);
+
+            proto = Object.getPrototypeOf(proto);
+        }
+
+        return rules;
     }
 }

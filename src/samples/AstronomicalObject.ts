@@ -1,6 +1,6 @@
 import {isNotEmpty} from '../core/decorators';
 
-export class Satellite {
+export abstract class AstronomicalObject {
 
     @isNotEmpty()
     private _name: string;
@@ -13,13 +13,13 @@ export class Satellite {
         this._name = value;
     }
 
-    constructor(options?: SatelliteOptions) {
+    constructor(options?: AstronomicalObjectOptions) {
         if (options) {
             this._name = options.name;
         }
     }
 }
 
-export interface SatelliteOptions {
+export interface AstronomicalObjectOptions {
     name?: string;
 }

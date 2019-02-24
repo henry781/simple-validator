@@ -1,7 +1,8 @@
 import {isIn, isInteger, isNotEmpty, isValid} from '../core/decorators';
+import {AstronomicalObject, AstronomicalObjectOptions} from './AstronomicalObject';
 import {Satellite} from './Satellite';
 
-export class Planet {
+export class Planet extends AstronomicalObject {
 
     @isInteger()
     private _index: number;
@@ -12,17 +13,6 @@ export class Planet {
 
     set index(value: number) {
         this._index = value;
-    }
-
-    @isNotEmpty()
-    private _name: string;
-
-    get name(): string {
-        return this._name;
-    }
-
-    set name(value: string) {
-        this._name = value;
     }
 
     @isNotEmpty()
@@ -60,9 +50,9 @@ export class Planet {
     }
 
     constructor(options?: PlanetOptions) {
+        super(options);
         if (options) {
             this._index = options.index;
-            this._name = options.name;
             this._aliases = options.aliases;
             this._color = options.color;
             this._satellites = options.satellites;
@@ -70,9 +60,8 @@ export class Planet {
     }
 }
 
-export interface PlanetOptions {
+export interface PlanetOptions extends AstronomicalObjectOptions {
     index?: number;
-    name?: string;
     aliases?: string[];
     color?: string;
     satellites?: Satellite[];
