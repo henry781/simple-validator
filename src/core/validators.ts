@@ -1,5 +1,10 @@
-export type ValidatorFn = (obj: object, propertyKey: string, options: ValidatorOptions) => string;
+import {Validator} from './Validator';
 
+export type ValidatorFn = (obj: object, propertyKey: string, options: ValidatorOptions) => string[] | string;
+
+/**
+ * validators
+ */
 export const validators: { [name: string]: ValidatorFn } = {
 
     /**
@@ -12,11 +17,11 @@ export const validators: { [name: string]: ValidatorFn } = {
         const value = obj[propertyKey];
 
         if (value === undefined || value === null || value === '') {
-            return `property <${propertyKey}> should not be empty`;
+            return 'should not be empty';
         }
 
         if (Array.isArray(value) && !value.length) {
-            return `property <${propertyKey}> should not be an empty array`;
+            return 'should not be an empty array';
         }
     },
 
@@ -31,7 +36,7 @@ export const validators: { [name: string]: ValidatorFn } = {
         const value = obj[propertyKey];
 
         if (options.arr.indexOf(value) === -1) {
-            return `property <${propertyKey}> should be one of <${options.arr}>`;
+            return `should be one of <${options.arr}>`;
         }
     },
 
@@ -45,10 +50,19 @@ export const validators: { [name: string]: ValidatorFn } = {
         const value = obj[propertyKey];
 
         if (!Number.isInteger(value)) {
-            return `property <${propertyKey}> should be an integer>`;
+            return 'should be an integer';
         }
     },
 
+    /**
+     * Valid
+     * @param obj
+     * @param propertyKey
+     */
+    valid: (obj: object, propertyKey: string) => {
+        const value = obj[propertyKey];
+        return Validator.validate(value);
+    },
 };
 
 export interface ValidatorOptions {

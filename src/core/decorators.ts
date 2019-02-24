@@ -22,22 +22,38 @@ export function is(validatorFn: ValidatorFn, options?: ValidatorOptions) {
     };
 }
 
+/**
+ * Is not empty
+ */
 export function isNotEmpty() {
     return is(validators.notEmpty);
 }
 
+/**
+ * Is integer
+ */
 export function isInteger() {
     return is(validators.integer);
 }
 
+/**
+ * Is in
+ * @param options
+ */
 export function isIn(options: InValidatorOptions) {
     return is(validators.in, options);
 }
 
+/**
+ * Is valid
+ */
 export function isValid() {
-    return is(null, null);
+    return is(validators.valid);
 }
 
+/**
+ * Validator rule
+ */
 export interface ValidatorRule {
     validatorFn: ValidatorFn;
     propertyKey: string;

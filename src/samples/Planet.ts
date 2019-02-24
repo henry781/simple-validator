@@ -47,7 +47,7 @@ export class Planet {
         this._color = value;
     }
 
-    // @isValid()
+    @isValid()
     @isNotEmpty()
     private _satellites: Satellite[];
 
