@@ -52,7 +52,7 @@ const result = Validator.validate(planet);
 // _satellites : 0 : _name : should not be empty
 ```
 
-### Cas valid
+### Case valid
 
 ```
 const satellite = new Satellite({name: 'moon'});
