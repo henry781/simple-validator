@@ -1,7 +1,21 @@
 import 'reflect-metadata';
 import {ValidatorRule} from './decorators';
+import {ValidatorError} from './ValidatorError';
 
 export class Validator {
+
+    /**
+     * Check an object is valid
+     * @param obj
+     */
+    public static check(obj: any) {
+
+        const errors = Validator.validate(obj);
+
+        if (errors.length) {
+            throw new ValidatorError(errors);
+        }
+    }
 
     /**
      * Validate an object

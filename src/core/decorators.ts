@@ -1,5 +1,12 @@
 import 'reflect-metadata';
-import {InValidatorOptions, ValidatorFn, ValidatorOptions, validators} from './validators';
+import {
+    HasLengthValidatorOptions,
+    InValidatorOptions,
+    MatchPatternValidatorOptions,
+    ValidatorFn,
+    ValidatorOptions,
+    validators,
+} from './validators';
 
 /**
  * Is
@@ -37,6 +44,13 @@ export function isInteger() {
 }
 
 /**
+ * Is not defined
+ */
+export function isNotDefined() {
+    return is(validators.notDefined);
+}
+
+/**
  * Is in
  * @param options
  */
@@ -49,6 +63,30 @@ export function isIn(options: InValidatorOptions) {
  */
 export function isValid() {
     return is(validators.valid);
+}
+
+/**
+ * Has min length
+ * @param {HasLengthValidatorOptions} options
+ */
+export function hasMinLength(options: HasLengthValidatorOptions) {
+    return is(validators.minLength, options);
+}
+
+/**
+ * Has max length
+ * @param {HasLengthValidatorOptions} options
+ */
+export function hasMaxLength(options: HasLengthValidatorOptions) {
+    return is(validators.maxLength, options);
+}
+
+/**
+ * Match pattern
+ * @param {MatchPatternValidatorOptions} options
+ */
+export function matchPattern(options: MatchPatternValidatorOptions) {
+    return is(validators.matchPattern, options);
 }
 
 /**
