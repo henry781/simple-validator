@@ -1,6 +1,6 @@
 {
   "name": "@henry781/simple-validator",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "",
   "main": "dist/simple-validator.bundle.js",
   "module": "dist/simple-validator.es.js",
