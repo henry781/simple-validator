@@ -64,7 +64,7 @@ export const validators: { [name: string]: ValidatorFn } = {
 
         const value = obj[propertyKey];
 
-        if (value !== undefined || value !== null) {
+        if (value !== undefined && value !== null) {
             return 'should not be defined';
         }
     },
