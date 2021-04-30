@@ -130,7 +130,7 @@ export const validators: { [name: string]: ValidatorFn } = {
 
         const value = obj[propertyKey];
 
-        if (!value || typeof value !== 'string') {
+        if (value === undefined || value === null || !value.match(options.pattern)) {
             return `should match pattern <${options.pattern}>`;
         }
 
